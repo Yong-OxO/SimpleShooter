@@ -6,6 +6,10 @@
 #include "GameFramework/Character.h"
 #include "SimpleShooterCharacter.generated.h"
 
+
+class USpringArmComponent;
+class UCameraComponent;
+
 UCLASS()
 class SIMPLESHOOTER_API ASimpleShooterCharacter : public ACharacter
 {
@@ -14,6 +18,7 @@ class SIMPLESHOOTER_API ASimpleShooterCharacter : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ASimpleShooterCharacter();
+
 
 protected:
 	// Called when the game starts or when spawned
@@ -26,4 +31,10 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UPROPERTY(EditDefaultsOnly, BluePrintReadOnly, Category = "Camera", Meta = (AllowPrivateAcces = true))
+	USpringArmComponent* CameraBoom;
+	
+
+	UPROPERTY(EditDefaultsOnly, BluePrintReadOnly, Category = "Camera", Meta = (AllowPrivateAcces = true))
+	UCameraComponent* FallowCamera;
 };

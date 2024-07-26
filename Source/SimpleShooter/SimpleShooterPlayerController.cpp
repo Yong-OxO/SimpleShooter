@@ -22,6 +22,8 @@ void ASimpleShooterPlayerController::BeginPlay()
 	Super::BeginPlay();
 	check(MappingContext);
 
+	ControlledCharacter = CastChecked<ASimpleShooterCharacter>(GetPawn());
+
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
 	check(Subsystem);
 	Subsystem->AddMappingContext(MappingContext, 0);
@@ -33,10 +35,11 @@ void ASimpleShooterPlayerController::SetupInputComponent()
 	Super::SetupInputComponent();
 
 	UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
-	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ASimpleShooterPlayerController::Move);
 
+	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ASimpleShooterPlayerController::Move);
 	EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ASimpleShooterPlayerController::Jump);
 	EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ASimpleShooterPlayerController::StopJumping);
+	EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ASimpleShooterPlayerController::Look);
 
 }
 
@@ -76,6 +79,16 @@ void ASimpleShooterPlayerController::StopJumping()
 		ASimpleShooterCharacter* MyCharacter = CastChecked<ASimpleShooterCharacter>(MyPawn);
 		MyCharacter->StopJumping();
 	}
+}
+
+void ASimpleShooterPlayerController::Look(const FInputActionValue& InputActionValue)
+{
+	FVector2D LookAxisValue2D = InputActionValue.Get<FVector2D>();
+	
+	
+	AddYawInput(LookAxisValue2D.X * RotationRate);	
+	AddPitchInput(LookAxisValue2D.Y * RotationRate);
+	
 }
 
 

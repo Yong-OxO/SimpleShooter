@@ -12,6 +12,7 @@
 
 class UInputMappingContext;
 class UInputAction;
+class ASimpleShooterCharacter;
 struct FInputActionValue;
 
 UCLASS()
@@ -37,10 +38,20 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	TObjectPtr<UInputAction> JumpAction;
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	TObjectPtr<UInputAction> LookAction;
+
+
+	UPROPERTY(EditDefaultsOnly)
+	TObjectPtr<ASimpleShooterCharacter> ControlledCharacter;
 
 	void Move(const FInputActionValue& InputActionValue);
 	void Jump();
 	void StopJumping();
+	void Look(const FInputActionValue& InputActionValue);
+
+	UPROPERTY(EditAnywhere, Category = "Input", Meta = (AllowPrivateAccess = "true"))
+	float RotationRate = 1.f;
 
 	
 };
