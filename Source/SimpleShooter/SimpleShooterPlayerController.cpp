@@ -51,21 +51,27 @@ void ASimpleShooterPlayerController::Move(const FInputActionValue& InputActionVa
 	const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 	const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 
-	if (APawn* ControlledPawn = GetPawn<APawn>())
+	if (ControlledCharacter)
 	{
-		ControlledPawn->AddMovementInput(ForwardDirection, InputAxisVector.Y);
-		ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
+		ControlledCharacter->AddMovementInput(ForwardDirection, InputAxisVector.Y);
+		ControlledCharacter->AddMovementInput(RightDirection, InputAxisVector.X);
 	}
 }
 
 void ASimpleShooterPlayerController::Jump()
 {
-	ControlledCharacter->Jump();
+	if (ControlledCharacter)
+	{
+		ControlledCharacter->Jump();
+	}
 }
 
 void ASimpleShooterPlayerController::StopJumping()
 {
-	ControlledCharacter->StopJumping();
+	if (ControlledCharacter)
+	{
+		ControlledCharacter->StopJumping();
+	}
 }
 
 void ASimpleShooterPlayerController::Look(const FInputActionValue& InputActionValue)
