@@ -14,12 +14,14 @@ ASimpleShooterCharacter::ASimpleShooterCharacter()
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->SetupAttachment(RootComponent);
 	CameraBoom->TargetArmLength = 400.f;
-	CameraBoom->bUsePawnControlRotation;
+	CameraBoom->bUsePawnControlRotation = true;
 
 	FallowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FallowCamera"));
 	FallowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	// Socket이라는 특별한 이름 지시자를 지정하면 스프링암 끝에 자동으로 붙는다.
 	FallowCamera->bUsePawnControlRotation = false;
+
+	bUseControllerRotationYaw = true;
 }
 
 

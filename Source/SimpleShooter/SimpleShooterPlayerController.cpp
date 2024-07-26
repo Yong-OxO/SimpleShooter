@@ -27,7 +27,6 @@ void ASimpleShooterPlayerController::BeginPlay()
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
 	check(Subsystem);
 	Subsystem->AddMappingContext(MappingContext, 0);
-
 }
 
 void ASimpleShooterPlayerController::SetupInputComponent()
@@ -61,24 +60,12 @@ void ASimpleShooterPlayerController::Move(const FInputActionValue& InputActionVa
 
 void ASimpleShooterPlayerController::Jump()
 {
-	APawn* MyPawn = GetPawn();
-
-	if (MyPawn)
-	{
-		ASimpleShooterCharacter* MyCharacter = CastChecked<ASimpleShooterCharacter>(MyPawn);
-		MyCharacter->Jump();
-	}
+	ControlledCharacter->Jump();
 }
 
 void ASimpleShooterPlayerController::StopJumping()
 {
-	APawn* MyPawn = GetPawn();
-
-	if (MyPawn)
-	{
-		ASimpleShooterCharacter* MyCharacter = CastChecked<ASimpleShooterCharacter>(MyPawn);
-		MyCharacter->StopJumping();
-	}
+	ControlledCharacter->StopJumping();
 }
 
 void ASimpleShooterPlayerController::Look(const FInputActionValue& InputActionValue)
@@ -86,7 +73,7 @@ void ASimpleShooterPlayerController::Look(const FInputActionValue& InputActionVa
 	FVector2D LookAxisValue2D = InputActionValue.Get<FVector2D>();
 	
 	
-	AddYawInput(LookAxisValue2D.X * RotationRate);	
+	AddYawInput(LookAxisValue2D.X * RotationRate);
 	AddPitchInput(LookAxisValue2D.Y * RotationRate);
 	
 }
