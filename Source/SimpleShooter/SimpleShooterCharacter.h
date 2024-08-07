@@ -9,6 +9,7 @@
 
 class USpringArmComponent;
 class UCameraComponent;
+class AGun;
 
 UCLASS()
 class SIMPLESHOOTER_API ASimpleShooterCharacter : public ACharacter
@@ -37,4 +38,10 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BluePrintReadOnly, Category = "Camera", Meta = (AllowPrivateAcces = true))
 	UCameraComponent* FallowCamera;
+
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<AGun> GunClass;
+
+	UPROPERTY()
+	AGun* Gun;
 };

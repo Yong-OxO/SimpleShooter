@@ -50,11 +50,13 @@ void ASimpleShooterPlayerController::Move(const FInputActionValue& InputActionVa
 
 	const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 	const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-
+	
+	float YAxisCurrentSpeed = MoveSpeed * InputAxisVector.Y;
+	float XAxisCurrentSpeed = MoveSpeed * InputAxisVector.X;
 	if (ControlledCharacter)
 	{
-		ControlledCharacter->AddMovementInput(ForwardDirection, InputAxisVector.Y);
-		ControlledCharacter->AddMovementInput(RightDirection, InputAxisVector.X);
+		ControlledCharacter->AddMovementInput(ForwardDirection, YAxisCurrentSpeed);
+		ControlledCharacter->AddMovementInput(RightDirection, XAxisCurrentSpeed);
 	}
 }
 

@@ -53,5 +53,8 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Input", Meta = (AllowPrivateAccess = "true"))
 	float RotationRate = 1.f;
 
+	UPROPERTY(EditAnywhere, Category = "Input", Meta = (AllowPrivateAccess = "true"))
+	float MoveSpeed = 1.f;
+
 	
 };
